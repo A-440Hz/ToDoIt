@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import stevenbenack.com.todoist.Executor.Executor;
-import stevenbenack.com.todoist.Executor.Interactor;
 
  class ThreadExecutor implements Executor{
 
@@ -26,7 +25,7 @@ import stevenbenack.com.todoist.Executor.Interactor;
 	}
 
 	@Override
-	public void run(final Interactor interactor) {
+	public void run(final InteractorImpl interactor) {
 		if(interactor == null){
 			throw new IllegalArgumentException("Null interactor error");
 		}
@@ -34,6 +33,8 @@ import stevenbenack.com.todoist.Executor.Interactor;
 			@Override
 			public void run() {
 				interactor.run();
+
+				interactor.onFinished();
 			}
 		});
 	}
