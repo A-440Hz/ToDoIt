@@ -5,8 +5,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-
 import stevenbenack.com.todoist.Executor.Executor;
 
  class ThreadExecutor implements Executor{
@@ -19,7 +17,7 @@ import stevenbenack.com.todoist.Executor.Executor;
 
 	private ThreadPoolExecutor threadPoolExecutor;
 
-	@Inject ThreadExecutor(){
+	ThreadExecutor(){
 		threadPoolExecutor =
 				new ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME, TIME_UNIT, WORK_QUEUE);
 	}
