@@ -35,4 +35,5 @@ public class TaskBaseHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int prevVersion, int newVersion) {
 
     }
+    //
 }
