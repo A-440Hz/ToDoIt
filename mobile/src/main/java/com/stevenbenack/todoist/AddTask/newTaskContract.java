@@ -1,4 +1,4 @@
-package com.stevenbenack.todoist.NewTask;
+package com.stevenbenack.todoist.AddTask;
 
 
 import com.stevenbenack.todoist.BasePresenter;

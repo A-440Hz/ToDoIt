@@ -1,5 +1,6 @@
 package com.stevenbenack.todoist;
 
 
-public class BasePresenter {
+public interface BasePresenter {
+    void start();
 }

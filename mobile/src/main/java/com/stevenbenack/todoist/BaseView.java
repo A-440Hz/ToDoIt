@@ -1,5 +1,6 @@
 package com.stevenbenack.todoist;
 
 
-public interface BaseView {
+public interface BaseView<T> {
+    void setPresenter(T presenter);
 }

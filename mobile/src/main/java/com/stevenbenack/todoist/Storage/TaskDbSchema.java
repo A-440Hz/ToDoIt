@@ -3,7 +3,7 @@ package com.stevenbenack.todoist.Storage;
 
 import org.joda.time.DateTime;
 
-public class CrimeDbSchema {
+public class TaskDbSchema {
     public static final class TaskTable {
         public static final String NAME = "toDoTask";
 
