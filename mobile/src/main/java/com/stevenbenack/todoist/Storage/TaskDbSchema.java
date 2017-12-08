@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 
 public class TaskDbSchema {
     public static final class TaskTable {
-        public static final String NAME = "toDoTask";
+        public static final String NAME = "ToDoTask";
 
         public static final class Cols {
             public static final String UUID = "uuid";

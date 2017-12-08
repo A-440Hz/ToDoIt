@@ -7,11 +7,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.stevenbenack.todoist.Storage.TaskDbSchema.TaskTable;
 
-public class TaskBaseHelper extends SQLiteOpenHelper{
+public class TaskDbHelper extends SQLiteOpenHelper{
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "taskBase.db";
 
-    public TaskBaseHelper(Context context) {
+    public TaskDbHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 

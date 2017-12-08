@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 
 import java.util.UUID;
 
-public class toDoTask {
+public class ToDoTask {
     private UUID id;
     private String title;
     private String description;
@@ -13,7 +13,7 @@ public class toDoTask {
     private int priority;
     private boolean isDone;
 
-    public toDoTask(){
+    public ToDoTask(){
         id = UUID.randomUUID();
         createdDateTime = new DateTime();
     }
