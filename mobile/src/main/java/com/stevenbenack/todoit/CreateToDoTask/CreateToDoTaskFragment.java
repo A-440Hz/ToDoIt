@@ -3,6 +3,7 @@ package com.stevenbenack.todoit.CreateToDoTask;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -15,6 +16,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.stevenbenack.todoit.R;
+import com.stevenbenack.todoit.Storage.ToDoTask;
+
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,18 +28,25 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnTextChanged;
 import butterknife.Unbinder;
 
-import static junit.framework.Assert.assertNotNull;
-
-public class CreateToDoTaskFragment extends Fragment implements CreateToDoTaskContract.View {
-    private CreateToDoTaskContract.Presenter presenter;
+public class CreateToDoTaskFragment extends Fragment {
     Unbinder unbinder;
+    private ToDoTask task;
+    private DateTime createdDateTime;
+    private DateTime dueDateTime;
+
+    private static final DateTimeFormatter DUE_DATE_FORMAT = DateTimeFormat.forPattern("EEE, MM dd, YYYY");
+    private static final DateTimeFormatter DUE_TIME_FORMAT = DateTimeFormat.forPattern("HH:mm");
+    private static final DateTimeFormatter CURRENT_DATE_TIME =
+            DateTimeFormat.forPattern(DUE_DATE_FORMAT + " " + DUE_TIME_FORMAT);
 
     @BindView(R.id.create_task_title)
     EditText titleEditText;
-    @BindView(R.id.create_task_current_date_time)
+    @BindView(R.id.create_task_created_date_time)
     TextView currentDateTimeTextView;
-    @BindView(R.id.create_task_due_date_time)
-    EditText dueDateTimeEditText;
+    @BindView(R.id.create_task_due_date)
+    EditText dueDateEditText;
+    @BindView(R.id.create_task_due_time)
+    EditText dueTimeEditText;
     @BindView(R.id.create_task_all_day)
     CheckBox isAllDayCheckbox;
     @BindView(R.id.create_task_priority_text)
@@ -43,51 +56,32 @@ public class CreateToDoTaskFragment extends Fragment implements CreateToDoTaskCo
     @BindView(R.id.create_task_description)
     EditText descriptionEditText;
 
-
-    public CreateToDoTaskFragment() {
-        // constructor
-    }
-
     @Override
-    public void onResume() {
-        super.onResume();
-        presenter.start();
-    }
-
-    @Override
-    public void setPresenter(@NonNull CreateToDoTaskContract.Presenter presenter) {
-        assertNotNull(presenter);
-        this.presenter = presenter;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        task = new ToDoTask();
+        createdDateTime = new DateTime();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_task, container, false);
         unbinder = ButterKnife.bind(this, view);
+        currentDateTimeTextView.setText(createdDateTime.toString(CURRENT_DATE_TIME));
+
         return view;
     }
 
     // task title text changed
     @OnTextChanged(value = R.id.create_task_title, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void afterTitleChanged(Editable editable) {
-        presenter.afterTitleChanged(editable);
+        task.setTitle(editable.toString());
     }
 
-    @Override
-    public void setCurrentDateTimeText(String currentDateTime) {
-        currentDateTimeTextView.setText(currentDateTime);
-    }
-
-    // TODO: 12/8/2017 implement date-time picker
-    // task due date changed
-    @OnTextChanged(value = R.id.create_task_due_date_time, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    void afterDueDateTimeChanged(Editable editable) {
-        presenter.afterDueDateTimeChanged(editable);
-    }
-
+    // TODO: 12/8/2017 implement date-time pickers
     @OnCheckedChanged(R.id.create_task_all_day)
-    void onAllDayChecked(CompoundButton button, boolean isAllDayChecked){
-        presenter.onAllDayTaskChecked(isAllDayChecked);
+    void onAllDayCheckChanged(CompoundButton button, boolean isAllDayChecked) {
+        // use Joda period for all-day tasks
     }
 
     @Override

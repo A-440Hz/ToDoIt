@@ -46,7 +46,11 @@ public class ToDoTask {
         return createdDateTime;
     }
 
-    // TODO: 12/2/2017 Add support for different time zones
+    public void setCreatedDateTime(DateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    // TODO: 12/2/2017 Add support for different time zones and timezone changes
     public DateTime getDueDateTime() {
         return dueDateTime;
     }
@@ -67,7 +71,7 @@ public class ToDoTask {
         return isDone;
     }
 
-    public void setDone(boolean done) {
+    public void setIsDone(boolean done) {
         isDone = done;
     }
 }

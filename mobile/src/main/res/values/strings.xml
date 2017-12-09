@@ -2,10 +2,11 @@
     <string name="app_name">ToDoIt</string>
 
     <string name="create_task_todo">Thing to do</string>
-    <string name="create_task_current_dateTime">Current DateTime</string>
-    <string name="create_task_dateTime">Due DateTime</string>
+    <string name="create_task_created_dateTime">Created DateTime</string>
+    <string name="create_task_due_date">Due Date</string>
+    <string name="create_task_due_time">Due Time</string>
     <string name="create_task_all_day_box">All day?</string>
-    <string name="create_task_priority_text">Task priority</string>
+    <string name="create_task_priority_text">Task priority level</string>
     <string name="create_task_description">Description</string>
 
 </resources>

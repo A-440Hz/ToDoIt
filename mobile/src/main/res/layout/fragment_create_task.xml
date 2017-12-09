@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/create_task_current_date_time"
-        tools:text="@string/create_task_current_dateTime"
+        android:id="@+id/create_task_created_date_time"
+        tools:text="@string/create_task_created_dateTime"
         android:singleLine="true"
         android:ems="8"
 
@@ -31,8 +31,8 @@
         android:layout_marginBottom="4dp">
 
         <EditText
-            android:id="@+id/create_task_due_date_time"
-            tools:text="@string/create_task_dateTime"
+            android:id="@+id/create_task_due_date"
+            tools:text="@string/create_task_due_date"
             android:inputType="datetime"
             android:selectAllOnFocus="false"
             android:singleLine="true"
@@ -40,17 +40,30 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/create_task_due_time"
+            />
+
+        <EditText
+            android:id="@+id/create_task_due_time"
+            tools:text="@string/create_task_due_time"
+            android:inputType="datetime"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/create_task_all_day"
+            tools:ignore="LabelFor"/>
 
         <CheckBox
             android:id="@+id/create_task_all_day"
-            android:checked="false"
             android:text="@string/create_task_all_day_box"
+            android:checked="false"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            />
     </RelativeLayout>
 
     <LinearLayout
@@ -64,7 +77,8 @@
             android:text="@string/create_task_priority_text"
 
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"/>
 
         <SeekBar
             android:id="@+id/create_task_priority_seekbar"
@@ -74,6 +88,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"/>
     </LinearLayout>
