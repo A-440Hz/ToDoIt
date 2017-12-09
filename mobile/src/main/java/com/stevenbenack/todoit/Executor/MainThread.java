@@ -1,4 +1,4 @@
-package com.stevenbenack.todoist.Executor;
+package com.stevenbenack.todoit.Executor;
 
 /**
  * UI thread abstraction created to change the execution context from any thread to the UI thread.

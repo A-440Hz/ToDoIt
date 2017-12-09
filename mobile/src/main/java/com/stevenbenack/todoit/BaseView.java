@@ -1,4 +1,4 @@
-package com.stevenbenack.todoist;
+package com.stevenbenack.todoit;
 
 
 public interface BaseView<T> {

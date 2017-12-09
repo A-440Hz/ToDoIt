@@ -1,6 +1,6 @@
-package com.stevenbenack.todoist.Executor.ThreadExecutor;
+package com.stevenbenack.todoit.Executor.ThreadExecutor;
 
-import com.stevenbenack.todoist.Executor.Executor;
+import com.stevenbenack.todoit.Executor.Executor;
 
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;

@@ -1,11 +1,11 @@
-package com.stevenbenack.todoist.Storage;
+package com.stevenbenack.todoit.Storage;
 
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.stevenbenack.todoist.Storage.TaskDbSchema.TaskTable;
+import com.stevenbenack.todoit.Storage.TaskDbSchema.TaskTable;
 
 public class TaskDbHelper extends SQLiteOpenHelper{
     private static final int VERSION = 1;

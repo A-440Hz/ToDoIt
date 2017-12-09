@@ -1,4 +1,4 @@
-package com.stevenbenack.todoist.Executor;
+package com.stevenbenack.todoit.Executor;
 
 public interface Interactor {
 	void run();

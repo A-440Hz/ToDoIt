@@ -1,9 +1,9 @@
-package com.stevenbenack.todoist.Executor.ThreadExecutor;
+package com.stevenbenack.todoit.Executor.ThreadExecutor;
 
 import android.os.Handler;
 import android.os.Looper;
 
-import com.stevenbenack.todoist.Executor.MainThread;
+import com.stevenbenack.todoit.Executor.MainThread;
 
 public class MainThreadImpl implements MainThread{
 	private Handler handler;

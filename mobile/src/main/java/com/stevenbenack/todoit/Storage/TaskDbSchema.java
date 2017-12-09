@@ -1,7 +1,5 @@
-package com.stevenbenack.todoist.Storage;
+package com.stevenbenack.todoit.Storage;
 
-
-import org.joda.time.DateTime;
 
 public class TaskDbSchema {
     public static final class TaskTable {
