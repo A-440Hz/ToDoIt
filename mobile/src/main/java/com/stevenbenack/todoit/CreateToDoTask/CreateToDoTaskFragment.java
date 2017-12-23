@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -24,11 +23,10 @@ import org.joda.time.format.DateTimeFormatter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnTextChanged;
 import butterknife.Unbinder;
 
-public class CreateToDoTaskFragment extends Fragment {
+public class CreateToDoTaskFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
     Unbinder unbinder;
     private ToDoTask task;
     private DateTime createdDateTime;
@@ -49,10 +47,8 @@ public class CreateToDoTaskFragment extends Fragment {
     EditText dueTimeEditText;
     @BindView(R.id.create_task_all_day)
     CheckBox isAllDayCheckbox;
-    @BindView(R.id.create_task_priority_text)
-    TextView createTaskPriorityText;
     @BindView(R.id.create_task_priority_seekbar)
-    SeekBar createTaskPrioritySeekbar;
+    SeekBar prioritySeekbar;
     @BindView(R.id.create_task_description)
     EditText descriptionEditText;
 
@@ -69,19 +65,35 @@ public class CreateToDoTaskFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         currentDateTimeTextView.setText(createdDateTime.toString(CURRENT_DATE_TIME));
 
+        prioritySeekbar.setOnSeekBarChangeListener(this);
+
         return view;
     }
 
-    // task title text changed
+    // Task title text changed
     @OnTextChanged(value = R.id.create_task_title, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void afterTitleChanged(Editable editable) {
         task.setTitle(editable.toString());
     }
 
-    // TODO: 12/8/2017 implement date-time pickers
-    @OnCheckedChanged(R.id.create_task_all_day)
-    void onAllDayCheckChanged(CompoundButton button, boolean isAllDayChecked) {
-        // use Joda period for all-day tasks
+    // Task priority seekbar changed
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int priority, boolean wasChangedByUser) {
+        task.setPriority(priority);
+    }
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    // Task description changed
+    @OnTextChanged(value = R.id.create_task_description, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    void afterDescriptionChanged(Editable editable){
+        task.setDescription(editable.toString());
     }
 
     @Override
