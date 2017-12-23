@@ -2,13 +2,13 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="16dp"
+                android:layout_margin="8dp"
                 android:orientation="vertical"
                 tools:context="com.stevenbenack.todoit.CreateToDoTask.CreateToDoTaskFragment">
 
     <EditText
         android:id="@+id/create_task_title"
-        android:hint="@string/create_task_todo"
+        android:hint="@string/create_task_todo_task"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -56,14 +56,14 @@
 
         <CheckBox
             android:id="@+id/create_task_all_day"
-            android:text="@string/create_task_all_day_box"
             android:checked="false"
+            android:text="@string/create_task_all_day_box"
+            android:visibility="invisible"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            />
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -80,26 +80,42 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"/>
 
-        <SeekBar
-            android:id="@+id/create_task_priority_seekbar"
-            style="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:max="5"
-            android:progress="3"
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <TextView
+               android:id="@+id/create_task_priority_low"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/create_task_priority_low"
+               android:layout_alignParentStart="true"/>
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"/>
-    </LinearLayout>
+           <SeekBar
+               android:id="@+id/create_task_priority_seekbar"
+               style="@style/Widget.AppCompat.SeekBar.Discrete"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+
+               android:layout_alignBottom="@+id/create_task_priority_low"
+               android:layout_toEndOf="@+id/create_task_priority_low"
+               android:layout_toStartOf="@+id/create_task_priority_high"
+               android:max="5"
+               android:progress="1"/>
+           <TextView
+               android:id="@+id/create_task_priority_high"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/create_task_priority_high"
+               android:layout_alignParentEnd="true"/>
+       </RelativeLayout>
+       </LinearLayout>
 
     <EditText
         android:id="@+id/create_task_description"
-        android:hint="@string/create_task_description"
-
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:hint="@string/create_task_description"
         tools:ignore="LabelFor"/>
-
 </LinearLayout>
