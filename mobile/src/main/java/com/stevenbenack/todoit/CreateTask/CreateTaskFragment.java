@@ -1,4 +1,4 @@
-package com.stevenbenack.todoit.CreateToDoTask;
+package com.stevenbenack.todoit.CreateTask;
 
 
 import android.os.Bundle;
@@ -26,10 +26,10 @@ import butterknife.ButterKnife;
 import butterknife.OnTextChanged;
 import butterknife.Unbinder;
 
-public class CreateToDoTaskFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
+public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
     Unbinder unbinder;
     private ToDoTask task;
-    private DateTime createdDateTime;
+    private DateTime taskCreatedDateTime;
     private DateTime dueDateTime;
 
     private static final DateTimeFormatter DUE_DATE_FORMAT = DateTimeFormat.forPattern("EEE, MM dd, YYYY");
@@ -56,14 +56,14 @@ public class CreateToDoTaskFragment extends Fragment implements SeekBar.OnSeekBa
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         task = new ToDoTask();
-        createdDateTime = new DateTime();
+        taskCreatedDateTime = new DateTime();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_task, container, false);
         unbinder = ButterKnife.bind(this, view);
-        currentDateTimeTextView.setText(createdDateTime.toString(CURRENT_DATE_TIME));
+        currentDateTimeTextView.setText(taskCreatedDateTime.toString(CURRENT_DATE_TIME));
 
         prioritySeekbar.setOnSeekBarChangeListener(this);
 
@@ -75,6 +75,8 @@ public class CreateToDoTaskFragment extends Fragment implements SeekBar.OnSeekBa
     void afterTitleChanged(Editable editable) {
         task.setTitle(editable.toString());
     }
+
+    // TODO: 12/24/2017 add date and time picker for task due datetime
 
     // Task priority seekbar changed
     @Override
