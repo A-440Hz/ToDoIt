@@ -1,7 +1,7 @@
-package com.stevenbenack.todoit.Executor.ThreadExecutor;
+package com.stevenbenack.todoit.executor.ThreadExecutor;
 
-import com.stevenbenack.todoit.Executor.Executor;
-import com.stevenbenack.todoit.Executor.MainThread;
+import com.stevenbenack.todoit.executor.Executor;
+import com.stevenbenack.todoit.executor.MainThread;
 
 public abstract class InteractorImpl{
     private Executor threadExecutor;

@@ -1,4 +1,4 @@
-package com.stevenbenack.todoit.Storage;
+package com.stevenbenack.todoit.storage;
 
 import org.joda.time.DateTime;
 

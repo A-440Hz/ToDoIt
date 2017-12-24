@@ -1,4 +1,4 @@
-package com.stevenbenack.todoit.CreateTask;
+package com.stevenbenack.todoit.createtask;
 
 
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.stevenbenack.todoit.R;
-import com.stevenbenack.todoit.Storage.ToDoTask;
+import com.stevenbenack.todoit.storage.ToDoTask;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -29,13 +29,12 @@ import butterknife.Unbinder;
 public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
     Unbinder unbinder;
     private ToDoTask task;
-    private DateTime taskCreatedDateTime;
+    private DateTime createdDateTime;
     private DateTime dueDateTime;
 
-    private static final DateTimeFormatter DUE_DATE_FORMAT = DateTimeFormat.forPattern("EEE, MM dd, YYYY");
-    private static final DateTimeFormatter DUE_TIME_FORMAT = DateTimeFormat.forPattern("HH:mm");
-    private static final DateTimeFormatter CURRENT_DATE_TIME =
-            DateTimeFormat.forPattern(DUE_DATE_FORMAT + " " + DUE_TIME_FORMAT);
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("EEE, MM dd, yyyy");
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormat.forPattern("HH:mm");
+    private static final DateTimeFormatter CURRENT_DATE_TIME = DateTimeFormat.forPattern("EEE, MM/dd/yyyy, HH:mm");
 
     @BindView(R.id.create_task_title)
     EditText titleEditText;
@@ -56,14 +55,15 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         task = new ToDoTask();
-        taskCreatedDateTime = new DateTime();
+        createdDateTime = new DateTime();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_task, container, false);
         unbinder = ButterKnife.bind(this, view);
-        currentDateTimeTextView.setText(taskCreatedDateTime.toString(CURRENT_DATE_TIME));
+        // TODO: 12/24/2017 change time format to 12-hour time format
+        currentDateTimeTextView.setText(createdDateTime.toString(CURRENT_DATE_TIME));
 
         prioritySeekbar.setOnSeekBarChangeListener(this);
 

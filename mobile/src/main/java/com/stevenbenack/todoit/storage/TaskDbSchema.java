@@ -1,4 +1,4 @@
-package com.stevenbenack.todoit.Storage;
+package com.stevenbenack.todoit.storage;
 
 
 public class TaskDbSchema {

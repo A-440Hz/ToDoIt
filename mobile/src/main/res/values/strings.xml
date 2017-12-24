@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ToDoIt</string>
-    <string name="action_bar_title_create_task">Create Task</string>
+    <string name="action_bar_title_create_task">New Task</string>
 
     <string name="create_task_todo_task">Thing to do</string>
     <string name="create_task_created_dateTime">Created DateTime</string>

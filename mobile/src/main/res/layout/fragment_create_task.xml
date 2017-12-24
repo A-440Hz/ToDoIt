@@ -4,7 +4,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:orientation="vertical"
-                tools:context="com.stevenbenack.todoit.CreateTask.CreateTaskFragment">
+                tools:context="com.stevenbenack.todoit.createtask.CreateTaskFragment">
 
     <EditText
         android:id="@+id/create_task_title"
@@ -19,7 +19,7 @@
         android:singleLine="true"
         android:ems="8"
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"/>
 
@@ -117,5 +117,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:hint="@string/create_task_description"
-        tools:ignore="LabelFor"/>
+        tools:ignore="LabelFor"
+        android:maxLines="8"/>
 </LinearLayout>

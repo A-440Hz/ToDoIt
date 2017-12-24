@@ -8,11 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 public abstract class TaskFragmentActivity extends AppCompatActivity {
 
     protected abstract Fragment createFragment();
+    protected abstract void setActionBar();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_container);
+
+        setActionBar();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
