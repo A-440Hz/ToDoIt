@@ -14,6 +14,8 @@ public class CreateTaskActivity extends TaskFragmentActivity{
 
     @Override
     protected void setActionBar() {
-        getSupportActionBar().setTitle(R.string.action_bar_title_create_task);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.action_bar_title_create_task);
+        }
     }
 }
