@@ -3,19 +3,19 @@ package com.stevenbenack.todoit.createtask;
 import android.support.v4.app.Fragment;
 
 import com.stevenbenack.todoit.R;
-import com.stevenbenack.todoit.TaskFragmentActivity;
+import com.stevenbenack.todoit.TodoTaskFragmentActivity;
 
-public class CreateTaskActivity extends TaskFragmentActivity{
+public class CreateTodoTaskActivity extends TodoTaskFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new CreateTaskFragment();
+        return new CreateTodoTaskFragment();
     }
 
     @Override
     protected void setActionBar() {
         if(getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(R.string.action_bar_title_create_task);
+            getSupportActionBar().setTitle(R.string.create_task_action_bar_title);
         }
     }
 }

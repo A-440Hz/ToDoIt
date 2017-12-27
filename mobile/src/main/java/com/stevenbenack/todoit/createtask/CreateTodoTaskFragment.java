@@ -26,9 +26,9 @@ import butterknife.ButterKnife;
 import butterknife.OnTextChanged;
 import butterknife.Unbinder;
 
-public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
+public class CreateTodoTaskFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
     Unbinder unbinder;
-    private ToDoTask task;
+    private ToDoTask todoTask;
     private DateTime createdDateTime;
     private DateTime dueDateTime;
 
@@ -54,7 +54,7 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        task = new ToDoTask();
+        todoTask = new ToDoTask();
         createdDateTime = new DateTime();
     }
 
@@ -73,15 +73,15 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
     // Task title text changed
     @OnTextChanged(value = R.id.create_task_title, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void afterTitleChanged(Editable editable) {
-        task.setTitle(editable.toString());
+        todoTask.setTitle(editable.toString());
     }
 
-    // TODO: 12/24/2017 add date and time picker for task due datetime
+    // TODO: 12/24/2017 add date and time picker for todoTask due datetime
 
     // Task priority seekbar changed
     @Override
     public void onProgressChanged(SeekBar seekBar, int priority, boolean wasChangedByUser) {
-        task.setPriority(priority);
+        todoTask.setPriority(priority);
     }
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
@@ -95,7 +95,7 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
     // Task description changed
     @OnTextChanged(value = R.id.create_task_description, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void afterDescriptionChanged(Editable editable){
-        task.setDescription(editable.toString());
+        todoTask.setDescription(editable.toString());
     }
 
     @Override

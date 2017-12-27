@@ -4,11 +4,11 @@
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:orientation="vertical"
-                tools:context="com.stevenbenack.todoit.createtask.CreateTaskFragment">
+                tools:context="com.stevenbenack.todoit.createtask.CreateTodoTaskFragment">
 
     <EditText
         android:id="@+id/create_task_title"
-        android:hint="@string/create_task_todo_task"
+        android:hint="@string/create_task_task_title"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

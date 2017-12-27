@@ -2,12 +2,12 @@ package com.stevenbenack.todoit.tasklist;
 
 import android.support.v4.app.Fragment;
 
-import com.stevenbenack.todoit.TaskFragmentActivity;
+import com.stevenbenack.todoit.TodoTaskFragmentActivity;
 
-public class TaskListActivity extends TaskFragmentActivity{
+public class TodoTaskListActivity extends TodoTaskFragmentActivity {
     @Override
     protected Fragment createFragment() {
-        return new TaskListFragment();
+        return new TodoTaskListFragment();
     }
 
     @Override
