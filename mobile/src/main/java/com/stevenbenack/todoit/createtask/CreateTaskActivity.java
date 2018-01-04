@@ -3,13 +3,13 @@ package com.stevenbenack.todoit.createtask;
 import android.support.v4.app.Fragment;
 
 import com.stevenbenack.todoit.R;
-import com.stevenbenack.todoit.TodoTaskFragmentActivity;
+import com.stevenbenack.todoit.TaskFragmentActivity;
 
-public class CreateTodoTaskActivity extends TodoTaskFragmentActivity {
+public class CreateTaskActivity extends TaskFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new CreateTodoTaskFragment();
+        return new CreateTaskFragment();
     }
 
     @Override

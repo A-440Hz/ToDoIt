@@ -15,16 +15,16 @@ import com.stevenbenack.todoit.storage.TodoTaskStorage;
 
 import java.util.List;
 
-public class TodoTaskListFragment extends Fragment {
-    private RecyclerView todoTaskRecyclerView;
+public class TaskListFragment extends Fragment {
+    private RecyclerView taskListRecyclerView;
     private TaskAdapter adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task_list, container, false);
 
-        todoTaskRecyclerView = view.findViewById(R.id.task_list_recycler_view);
-        todoTaskRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        taskListRecyclerView = view.findViewById(R.id.task_list_recycler_view);
+        taskListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         UpdateUi();
 
@@ -36,6 +36,6 @@ public class TodoTaskListFragment extends Fragment {
         List<ToDoTask> toDoTasks = todoTaskStorage.getTodoTasks();
 
         adapter = new TaskAdapter(toDoTasks);
-        todoTaskRecyclerView.setAdapter(adapter);
+        taskListRecyclerView.setAdapter(adapter);
     }
 }
