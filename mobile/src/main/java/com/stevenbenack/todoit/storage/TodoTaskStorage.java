@@ -27,6 +27,13 @@ public class TodoTaskStorage {
         database = new TodoTaskDbHelper(context).getWritableDatabase();
 
         todoTaskList = new ArrayList<>();
+
+        for(int i = 0; i < 100; i++){
+            ToDoTask task = new ToDoTask();
+            task.setTitle("task #" + i);
+            task.setDescription("test");
+            todoTaskList.add(task);
+        }
     }
 
      public List<ToDoTask> getTodoTasks() {
