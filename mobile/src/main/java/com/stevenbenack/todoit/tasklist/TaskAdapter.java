@@ -24,7 +24,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_task, parent, false);
+                .inflate(R.layout.list_task_item, parent, false);
 
         return new ViewHolder(view);
     }
@@ -46,11 +46,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
     }
 
     // Recycler View ViewHolder
-    public final class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.list_item_title)
-        TextView listItemTitle;
-        @BindView(R.id.list_item_description)
-        TextView listItemDescription;
+    public final class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        @BindView(R.id.list_item_title) TextView listItemTitle;
+        @BindView(R.id.list_item_description) TextView listItemDescription;
 
         private ToDoTask task;
 
@@ -63,6 +61,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
             task = toDoTask;
             listItemTitle.setText(task.getTitle());
             listItemDescription.setText(task.getDescription());
+        }
+
+        @Override
+        public void onClick(View view) {
+
         }
     }
 }
