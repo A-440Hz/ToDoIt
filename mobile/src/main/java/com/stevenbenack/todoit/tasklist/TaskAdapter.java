@@ -1,12 +1,16 @@
 package com.stevenbenack.todoit.tasklist;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.stevenbenack.todoit.R;
+import com.stevenbenack.todoit.createtask.CreateTaskActivity;
 import com.stevenbenack.todoit.storage.ToDoTask;
 
 import java.util.List;
@@ -16,6 +20,10 @@ import butterknife.ButterKnife;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
     private List<ToDoTask> toDoTasks;
+
+    public interface TaskClickListener{
+        void onTaskClick(ToDoTask toDoTask);
+    }
 
     public TaskAdapter(List<ToDoTask> toDoTasks) {
         this.toDoTasks = toDoTasks;
@@ -55,6 +63,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+
+            view.setOnClickListener(this);
         }
 
         public void bind(ToDoTask toDoTask) {
@@ -65,7 +75,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
         @Override
         public void onClick(View view) {
-
+            Log.d("test", "click");
+            Context context = view.getContext();
+            Intent intent = CreateTaskActivity.newIntent(context, task.getId());
+            context.startActivity(intent);
         }
     }
 }

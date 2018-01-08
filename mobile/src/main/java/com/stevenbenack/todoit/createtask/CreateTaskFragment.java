@@ -16,10 +16,13 @@ import android.widget.TextView;
 
 import com.stevenbenack.todoit.R;
 import com.stevenbenack.todoit.storage.ToDoTask;
+import com.stevenbenack.todoit.storage.TodoTaskStorage;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,42 +30,48 @@ import butterknife.OnTextChanged;
 import butterknife.Unbinder;
 
 public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
+    private static final String TODOTASK_UUID = "todotask_id";
+    // TODO: 12/24/2017 change time format to 12-hour time format
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("EEE, MM dd, yyyy");
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormat.forPattern("HH:mm");
+    private static final DateTimeFormatter CURRENT_DATE_TIME = DateTimeFormat.forPattern("EEE, MM/dd/yyyy, HH:mm");
+
     Unbinder unbinder;
     private ToDoTask task;
     private DateTime createdDateTime;
     private DateTime dueDateTime;
 
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("EEE, MM dd, yyyy");
-    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormat.forPattern("HH:mm");
-    private static final DateTimeFormatter CURRENT_DATE_TIME = DateTimeFormat.forPattern("EEE, MM/dd/yyyy, HH:mm");
+    @BindView(R.id.create_task_title) EditText titleEditText;
+    @BindView(R.id.create_task_created_date_time) TextView currentDateTimeTextView;
+    @BindView(R.id.create_task_due_date) EditText dueDateEditText;
+    @BindView(R.id.create_task_due_time) EditText dueTimeEditText;
+    @BindView(R.id.create_task_all_day) CheckBox isAllDayCheckbox;
+    @BindView(R.id.create_task_priority_seekbar) SeekBar prioritySeekbar;
+    @BindView(R.id.create_task_description) EditText descriptionEditText;
 
-    @BindView(R.id.create_task_title)
-    EditText titleEditText;
-    @BindView(R.id.create_task_created_date_time)
-    TextView currentDateTimeTextView;
-    @BindView(R.id.create_task_due_date)
-    EditText dueDateEditText;
-    @BindView(R.id.create_task_due_time)
-    EditText dueTimeEditText;
-    @BindView(R.id.create_task_all_day)
-    CheckBox isAllDayCheckbox;
-    @BindView(R.id.create_task_priority_seekbar)
-    SeekBar prioritySeekbar;
-    @BindView(R.id.create_task_description)
-    EditText descriptionEditText;
+    public static CreateTaskFragment newInstance(UUID todoTaskId){
+        Bundle args = new Bundle();
+        args.putSerializable(TODOTASK_UUID, todoTaskId);
+
+        CreateTaskFragment fragment = new CreateTaskFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        task = new ToDoTask();
         createdDateTime = new DateTime();
+
+        UUID taskId = (UUID) getArguments().getSerializable(TODOTASK_UUID);
+        task = TodoTaskStorage.get(getActivity()).getToDoTask(taskId);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_task, container, false);
         unbinder = ButterKnife.bind(this, view);
-        // TODO: 12/24/2017 change time format to 12-hour time format
+
         currentDateTimeTextView.setText(createdDateTime.toString(CURRENT_DATE_TIME));
 
         prioritySeekbar.setOnSeekBarChangeListener(this);
