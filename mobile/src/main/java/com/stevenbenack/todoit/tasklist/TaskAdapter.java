@@ -3,7 +3,6 @@ package com.stevenbenack.todoit.tasklist;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +74,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
 
         @Override
         public void onClick(View view) {
-            Log.d("test", "click");
             Context context = view.getContext();
             Intent intent = CreateTaskActivity.newIntent(context, task.getId());
             context.startActivity(intent);

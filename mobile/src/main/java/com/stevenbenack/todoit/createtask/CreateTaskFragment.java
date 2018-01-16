@@ -30,7 +30,7 @@ import butterknife.OnTextChanged;
 import butterknife.Unbinder;
 
 public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
-    private static final String TODOTASK_UUID = "todotask_id";
+    private static final String ARGS_TODOTASK_ID = "todotask_id";
     // TODO: 12/24/2017 change time format to 12-hour time format
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("EEE, MM dd, yyyy");
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormat.forPattern("HH:mm");
@@ -51,7 +51,7 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
 
     public static CreateTaskFragment newInstance(UUID todoTaskId){
         Bundle args = new Bundle();
-        args.putSerializable(TODOTASK_UUID, todoTaskId);
+        args.putSerializable(ARGS_TODOTASK_ID, todoTaskId);
 
         CreateTaskFragment fragment = new CreateTaskFragment();
         fragment.setArguments(args);
@@ -63,7 +63,7 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
         super.onCreate(savedInstanceState);
         createdDateTime = new DateTime();
 
-        UUID taskId = (UUID) getArguments().getSerializable(TODOTASK_UUID);
+        UUID taskId = (UUID) getArguments().getSerializable(ARGS_TODOTASK_ID);
         task = TodoTaskStorage.get(getActivity()).getToDoTask(taskId);
     }
 
@@ -73,6 +73,7 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
         unbinder = ButterKnife.bind(this, view);
 
         currentDateTimeTextView.setText(createdDateTime.toString(CURRENT_DATE_TIME));
+        titleEditText.setText(task.getTitle());
 
         prioritySeekbar.setOnSeekBarChangeListener(this);
 
