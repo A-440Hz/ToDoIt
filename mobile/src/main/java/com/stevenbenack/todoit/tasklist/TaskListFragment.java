@@ -26,16 +26,27 @@ public class TaskListFragment extends Fragment {
         taskListRecyclerView = view.findViewById(R.id.task_list_recycler_view);
         taskListRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        UpdateUi();
+        updateUi();
 
         return view;
     }
 
-    private void UpdateUi() {
-        TodoTaskStorage todoTaskStorage = TodoTaskStorage.get(getActivity());
-        List<ToDoTask> toDoTasks = todoTaskStorage.getTodoTasks();
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUi();
+    }
 
-        adapter = new TaskAdapter(toDoTasks);
-        taskListRecyclerView.setAdapter(adapter);
+    private void updateUi() {
+        TodoTaskStorage todoTaskStorage = TodoTaskStorage.get(getActivity());
+        List<ToDoTask> toDoTasksList = todoTaskStorage.getTodoTasks();
+
+        if(adapter == null){
+            adapter = new TaskAdapter(toDoTasksList);
+            taskListRecyclerView.setAdapter(adapter);
+        } else {
+            adapter.notifyDataSetChanged();
+        }
+
     }
 }
