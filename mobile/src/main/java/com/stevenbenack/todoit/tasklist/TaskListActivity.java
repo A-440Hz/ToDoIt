@@ -12,6 +12,5 @@ public class TaskListActivity extends TaskFragmentActivity{
 
     @Override
     protected void setActionBar() {
-
     }
 }

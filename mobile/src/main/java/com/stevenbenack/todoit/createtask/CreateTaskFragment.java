@@ -1,6 +1,7 @@
 package com.stevenbenack.todoit.createtask;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -84,6 +85,7 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
     @OnTextChanged(value = R.id.create_task_title, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void afterTitleChanged(Editable editable) {
         task.setTitle(editable.toString());
+        onTaskChanged();
     }
 
     // TODO: 12/24/2017 add date and time picker for task due datetime
@@ -92,6 +94,7 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
     @Override
     public void onProgressChanged(SeekBar seekBar, int priority, boolean wasChangedByUser) {
         task.setPriority(priority);
+        onTaskChanged();
     }
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
@@ -106,6 +109,11 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
     @OnTextChanged(value = R.id.create_task_description, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     void afterDescriptionChanged(Editable editable){
         task.setDescription(editable.toString());
+        onTaskChanged();
+    }
+
+    private void onTaskChanged(){
+        getActivity().setResult(Activity.RESULT_OK);
     }
 
     @Override

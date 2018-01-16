@@ -77,6 +77,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
             Context context = view.getContext();
             Intent intent = CreateTaskActivity.newIntent(context, task.getId());
             context.startActivity(intent);
+
         }
     }
 }
