@@ -20,10 +20,6 @@ import butterknife.ButterKnife;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
     private List<ToDoTask> toDoTasks;
 
-    public interface TaskClickListener{
-        void onTaskClick(ToDoTask toDoTask);
-    }
-
     public TaskAdapter(List<ToDoTask> toDoTasks) {
         this.toDoTasks = toDoTasks;
     }
@@ -77,7 +73,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
             Context context = view.getContext();
             Intent intent = CreateTaskActivity.newIntent(context, task.getId());
             context.startActivity(intent);
-
         }
     }
 }
