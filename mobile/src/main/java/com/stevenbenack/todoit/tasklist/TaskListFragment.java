@@ -21,7 +21,6 @@ import java.util.UUID;
 
 public class TaskListFragment extends Fragment implements TaskAdapter.TaskClickListener {
     private static final int REQUEST_TASK = 1;
-    public static final String CHANGED_TASK_KEY = "changed_task";
 
     private int taskChangedPosition = -1;
 
