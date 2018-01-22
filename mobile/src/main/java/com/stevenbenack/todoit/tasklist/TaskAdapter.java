@@ -75,6 +75,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
         @Override
         public void onClick(View view) {
             taskClickListener.onTaskClick(task.getId(), getAdapterPosition());
+
         }
     }
 }

@@ -22,8 +22,6 @@ import java.util.UUID;
 public class TaskListFragment extends Fragment implements TaskAdapter.TaskClickListener {
     private static final int REQUEST_TASK = 1;
 
-    private int taskChangedPosition = -1;
-
     private RecyclerView taskListRecyclerView;
     private TaskAdapter adapter;
 
@@ -52,9 +50,8 @@ public class TaskListFragment extends Fragment implements TaskAdapter.TaskClickL
         if(adapter == null){
             adapter = new TaskAdapter(toDoTasksList, this);
             taskListRecyclerView.setAdapter(adapter);
-        } else if (taskChangedPosition != -1){
-            adapter.notifyItemChanged(taskChangedPosition);
         } else {
+            // TODO: 1/22/2018 implement adapter notifyItemChanged(...)
             adapter.notifyDataSetChanged();
         }
     }
@@ -62,7 +59,6 @@ public class TaskListFragment extends Fragment implements TaskAdapter.TaskClickL
     @Override
     public void onTaskClick(UUID taskId, int taskPosition) {
         // change taskChangedPosition key so that only this task is reloaded when onResume() is called
-        taskChangedPosition = taskPosition;
         Intent intent = CreateTaskActivity.newIntent(getActivity(), taskId);
         startActivityForResult(intent, REQUEST_TASK);
     }
