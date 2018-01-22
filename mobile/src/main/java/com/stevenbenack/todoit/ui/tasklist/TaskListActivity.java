@@ -1,4 +1,4 @@
-package com.stevenbenack.todoit.tasklist;
+package com.stevenbenack.todoit.ui.tasklist;
 
 import android.support.v4.app.Fragment;
 

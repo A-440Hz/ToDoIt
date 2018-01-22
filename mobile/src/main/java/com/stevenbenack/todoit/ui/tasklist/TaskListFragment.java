@@ -1,4 +1,4 @@
-package com.stevenbenack.todoit.tasklist;
+package com.stevenbenack.todoit.ui.tasklist;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.stevenbenack.todoit.R;
-import com.stevenbenack.todoit.createtask.CreateTaskActivity;
+import com.stevenbenack.todoit.ui.createtask.CreateTaskActivity;
 import com.stevenbenack.todoit.storage.ToDoTask;
 import com.stevenbenack.todoit.storage.TodoTaskStorage;
 
