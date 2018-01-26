@@ -5,19 +5,19 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.stevenbenack.todoit.storage.TodoTaskDbSchema.TaskTable;
+import com.stevenbenack.todoit.storage.TaskDbSchema.TaskTable;
 
-public class TodoTaskDbHelper extends SQLiteOpenHelper{
+public class TaskDbHelper extends SQLiteOpenHelper{
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "todoTaskBase.db";
 
-    public TodoTaskDbHelper(Context context) {
+    public TaskDbHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table " + TodoTaskDbSchema.TaskTable.NAME +
+        sqLiteDatabase.execSQL("create table " + TaskDbSchema.TaskTable.NAME +
                                     "(" +
                                     " _id integer primary key autoincrement, " +
                                     TaskTable.Cols.UUID + ", " +

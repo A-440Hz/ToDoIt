@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.stevenbenack.todoit.R;
 import com.stevenbenack.todoit.storage.ToDoTask;
-import com.stevenbenack.todoit.storage.TodoTaskStorage;
+import com.stevenbenack.todoit.storage.TaskStorage;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -65,7 +65,7 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
         createdDateTime = new DateTime();
 
         UUID taskId = (UUID) getArguments().getSerializable(ARGS_TODOTASK_ID);
-        task = TodoTaskStorage.get(getActivity()).getToDoTask(taskId);
+        task = TaskStorage.get(getActivity()).getToDoTask(taskId);
     }
 
     @Override

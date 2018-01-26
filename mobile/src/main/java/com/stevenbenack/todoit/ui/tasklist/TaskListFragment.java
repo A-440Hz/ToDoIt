@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.stevenbenack.todoit.R;
 import com.stevenbenack.todoit.ui.createtask.CreateTaskActivity;
 import com.stevenbenack.todoit.storage.ToDoTask;
-import com.stevenbenack.todoit.storage.TodoTaskStorage;
+import com.stevenbenack.todoit.storage.TaskStorage;
 
 import java.util.List;
 import java.util.UUID;
@@ -44,7 +44,7 @@ public class TaskListFragment extends Fragment implements TaskAdapter.TaskClickL
     }
 
     private void updateUi() {
-        TodoTaskStorage todoTaskStorage = TodoTaskStorage.get(getActivity());
+        TaskStorage todoTaskStorage = TaskStorage.get(getActivity());
         List<ToDoTask> toDoTasksList = todoTaskStorage.getTodoTasks();
 
         if(adapter == null){

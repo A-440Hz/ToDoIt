@@ -1,7 +1,7 @@
 package com.stevenbenack.todoit.storage;
 
 
-public class TodoTaskDbSchema {
+public class TaskDbSchema {
     public static final class TaskTable {
         public static final String NAME = "ToDoTask";
 

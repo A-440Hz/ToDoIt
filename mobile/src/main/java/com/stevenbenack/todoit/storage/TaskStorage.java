@@ -8,40 +8,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class TodoTaskStorage {
-    private static TodoTaskStorage todoTaskStorage;
+public class TaskStorage {
+    private static TaskStorage taskStorage;
 
-    private List<ToDoTask> todoTaskList;
+    private List<ToDoTask> taskList;
     private Context context;
     private SQLiteDatabase database;
 
-    public static TodoTaskStorage get(Context context){
-        if(todoTaskStorage == null){
-            todoTaskStorage = new TodoTaskStorage(context);
+    public static TaskStorage get(Context context){
+        if(taskStorage == null){
+            taskStorage = new TaskStorage(context);
         }
-        return todoTaskStorage;
+        return taskStorage;
     }
 
-    private TodoTaskStorage(Context context) {
+    private TaskStorage(Context context) {
         context = context.getApplicationContext();
-        database = new TodoTaskDbHelper(context).getWritableDatabase();
+        database = new TaskDbHelper(context).getWritableDatabase();
 
-        todoTaskList = new ArrayList<>();
+        taskList = new ArrayList<>();
 
         for(int i = 0; i < 100; i++){
             ToDoTask task = new ToDoTask();
             task.setTitle("task #" + i);
             task.setDescription("test");
-            todoTaskList.add(task);
+            taskList.add(task);
         }
     }
 
      public List<ToDoTask> getTodoTasks() {
-        return todoTaskList;
+        return taskList;
     }
 
     public ToDoTask getToDoTask(UUID id){
-        for(ToDoTask task : todoTaskList){
+        for(ToDoTask task : taskList){
             if(task.getId().equals(id)){
                 return task;
             }
