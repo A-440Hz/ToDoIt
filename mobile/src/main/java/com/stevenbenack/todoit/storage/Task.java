@@ -13,7 +13,6 @@ public class Task {
 	private boolean isDone;
 
 	public static class TaskBuilder {
-		// test
 		// auto generated parameter
 		private UUID id;
 		private Date createdDateTime;
