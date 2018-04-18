@@ -32,8 +32,16 @@ public class TaskStorage {
     }
 
     public ToDoTask getTask(UUID id){
-
         return null;
+    }
+
+    public void updateTask(Task task) {
+    	String uuidString = task.getId().toString();
+    	ContentValues values = getContentValues(task);
+
+    	database.update(TaskDbSchema.TaskTable.NAME, values,
+			    TaskDbSchema.TaskTable.Cols.UUID  + " = ?",
+			    new String[] {uuidString});
     }
 
     public void addTask(Task task) {
