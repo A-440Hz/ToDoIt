@@ -9,7 +9,7 @@ import com.stevenbenack.todoit.storage.TaskDbSchema.TaskTable;
 
 public class TaskDbHelper extends SQLiteOpenHelper{
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "todoTaskBase.db";
+    private static final String DATABASE_NAME = "taskDatabase.db";
 
     public TaskDbHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);

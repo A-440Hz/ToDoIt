@@ -8,6 +8,5 @@ public class todoitApp extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        JodaTimeAndroid.init(this);
     }
 }

@@ -3,7 +3,7 @@ package com.stevenbenack.todoit.storage;
 
 public class TaskDbSchema {
     public static final class TaskTable {
-        public static final String NAME = "ToDoTask";
+        public static final String NAME = "tasks";
 
         public static final class Cols {
             public static final String UUID = "uuid";

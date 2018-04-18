@@ -45,7 +45,7 @@ public class TaskListFragment extends Fragment implements TaskAdapter.TaskClickL
 
     private void updateUi() {
         TaskStorage todoTaskStorage = TaskStorage.get(getActivity());
-        List<ToDoTask> toDoTasksList = todoTaskStorage.getTodoTasks();
+        List<ToDoTask> toDoTasksList = todoTaskStorage.getTasks();
 
         if(adapter == null){
             adapter = new TaskAdapter(toDoTasksList, this);

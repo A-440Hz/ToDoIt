@@ -65,4 +65,32 @@ public class Task {
 		priority = builder.priority;
 		isDone = builder.isDone;
 	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Date getCreatedDateTime() {
+		return createdDateTime;
+	}
+
+	public Date getDueDateTime() {
+		return dueDateTime;
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	public boolean getIsDone() {
+		return isDone;
+	}
 }

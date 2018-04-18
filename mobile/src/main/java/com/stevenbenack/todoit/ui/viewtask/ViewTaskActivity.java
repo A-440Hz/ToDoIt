@@ -27,7 +27,7 @@ public class ViewTaskActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.task_view_pager);
 
-        taskList = TaskStorage.get(this).getTodoTasks();
+        taskList = TaskStorage.get(this).getTasks();
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         viewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {

@@ -1,6 +1,7 @@
 package com.stevenbenack.todoit.storage;
 
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -11,9 +12,13 @@ import java.util.UUID;
 public class TaskStorage {
     private static TaskStorage taskStorage;
 
-    private List<ToDoTask> taskList;
     private Context context;
     private SQLiteDatabase database;
+
+	private TaskStorage(Context context) {
+		this.context = context.getApplicationContext();
+		database = new TaskDbHelper(context).getWritableDatabase();
+	}
 
     public static TaskStorage get(Context context){
         if(taskStorage == null){
@@ -22,30 +27,32 @@ public class TaskStorage {
         return taskStorage;
     }
 
-    private TaskStorage(Context context) {
-        context = context.getApplicationContext();
-        database = new TaskDbHelper(context).getWritableDatabase();
-
-        taskList = new ArrayList<>();
-
-        for(int i = 0; i < 100; i++){
-            ToDoTask task = new ToDoTask();
-            task.setTitle("task #" + i);
-            task.setDescription("test");
-            taskList.add(task);
-        }
+     public List<ToDoTask> getTasks() {
+        return new ArrayList<>();
     }
 
-     public List<ToDoTask> getTodoTasks() {
-        return taskList;
-    }
+    public ToDoTask getTask(UUID id){
 
-    public ToDoTask getToDoTask(UUID id){
-        for(ToDoTask task : taskList){
-            if(task.getId().equals(id)){
-                return task;
-            }
-        }
         return null;
+    }
+
+    public void addTask(Task task) {
+    	ContentValues values = getContentValues(task);
+    	database.insert(TaskDbSchema.TaskTable.NAME, null, values);
+    }
+
+    // ContentValues used to key-value write / store to db
+    private static ContentValues getContentValues(Task task) {
+    	ContentValues values = new ContentValues();
+
+    	values.put(TaskDbSchema.TaskTable.Cols.UUID, task.getId().toString());
+    	values.put(TaskDbSchema.TaskTable.Cols.TITLE, task.getTitle());
+    	values.put(TaskDbSchema.TaskTable.Cols.DESCRIPTION, task.getDescription());
+    	values.put(TaskDbSchema.TaskTable.Cols.CREATED, task.getCreatedDateTime().toString());
+    	values.put(TaskDbSchema.TaskTable.Cols.DUE, task.getDueDateTime().getTime());
+	    values.put(TaskDbSchema.TaskTable.Cols.PRIORITY, task.getPriority());
+	    values.put(TaskDbSchema.TaskTable.Cols.DONE, task.getIsDone() ? 1 : 0);
+
+	    return values;
     }
 }

@@ -65,7 +65,7 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
         createdDateTime = new DateTime();
 
         UUID taskId = (UUID) getArguments().getSerializable(ARGS_TODOTASK_ID);
-        task = TaskStorage.get(getActivity()).getToDoTask(taskId);
+        task = TaskStorage.get(getActivity()).getTask(taskId);
     }
 
     @Override
