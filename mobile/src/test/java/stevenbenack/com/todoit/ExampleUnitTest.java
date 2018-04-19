@@ -1,4 +1,4 @@
-package stevenbenack.com.todoist;
+package stevenbenack.com.todoit;
 
 import org.junit.Test;
 

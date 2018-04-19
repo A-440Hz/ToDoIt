@@ -1,4 +1,4 @@
-package stevenbenack.com.todoist;
+package stevenbenack.com.todoit;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
