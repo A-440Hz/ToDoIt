@@ -3,6 +3,7 @@ package com.stevenbenack.todoit.storage;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
@@ -12,11 +13,11 @@ import java.util.UUID;
 public class TaskStorage {
     private static TaskStorage taskStorage;
 
-    private Context context;
+//    private Context context;
     private SQLiteDatabase database;
 
-	private TaskStorage(Context context) {
-		this.context = context.getApplicationContext();
+	private TaskStorage(Context c) {
+		Context context = c.getApplicationContext();
 		database = new TaskDbHelper(context).getWritableDatabase();
 	}
 
@@ -27,11 +28,11 @@ public class TaskStorage {
         return taskStorage;
     }
 
-     public List<ToDoTask> getTasks() {
+     public List<Task> getTasks() {
         return new ArrayList<>();
     }
 
-    public ToDoTask getTask(UUID id){
+    public Task getTask(UUID id){
         return null;
     }
 
@@ -42,6 +43,18 @@ public class TaskStorage {
     	database.update(TaskDbSchema.TaskTable.NAME, values,
 			    TaskDbSchema.TaskTable.Cols.UUID  + " = ?",
 			    new String[] {uuidString});
+    }
+
+    private Cursor queryTasks(String whereClause, String[] whereArgs) {
+	    return database.query(
+			    TaskDbSchema.TaskTable.NAME,
+			    null, // for all columns
+			    whereClause,
+			    whereArgs,
+			    null,
+			    null,
+			    null
+	    );
     }
 
     public void addTask(Task task) {
