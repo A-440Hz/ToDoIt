@@ -16,13 +16,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.stevenbenack.todoit.R;
-import com.stevenbenack.todoit.storage.ToDoTask;
+import com.stevenbenack.todoit.storage.Task;
 import com.stevenbenack.todoit.storage.TaskStorage;
 
-import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.util.Date;
 import java.util.UUID;
 
 import butterknife.BindView;
@@ -38,12 +38,12 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
     private static final DateTimeFormatter CURRENT_DATE_TIME = DateTimeFormat.forPattern("EEE, MM/dd/yyyy, HH:mm");
 
     Unbinder unbinder;
-    private ToDoTask task;
-    private DateTime createdDateTime;
-    private DateTime dueDateTime;
+    private Task task;
+    private Date createdDateTime;
+    private Date dueDateTime;
 
     @BindView(R.id.create_task_title) EditText titleEditText;
-    @BindView(R.id.create_task_created_date_time) TextView currentDateTimeTextView;
+    @BindView(R.id.create_task_created_date_time) TextView createdDateTimeTextView;
     @BindView(R.id.create_task_due_date) EditText dueDateEditText;
     @BindView(R.id.create_task_due_time) EditText dueTimeEditText;
     @BindView(R.id.create_task_all_day) CheckBox isAllDayCheckbox;
@@ -62,7 +62,8 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        createdDateTime = new DateTime();
+	    // TODO: 4/19/2018 utilize Task builder
+	    createdDateTime = new Date();
 
         UUID taskId = (UUID) getArguments().getSerializable(ARGS_TODOTASK_ID);
         task = TaskStorage.get(getActivity()).getTask(taskId);
@@ -73,13 +74,27 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
         View view = inflater.inflate(R.layout.fragment_create_task, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        currentDateTimeTextView.setText(createdDateTime.toString(CURRENT_DATE_TIME));
+	    // TODO: 4/19/2018 format date because we are using Java.Util instead now
+//        currentDateTimeTextView.setText(createdDateTime.toString(CURRENT_DATE_TIME));
         titleEditText.setText(task.getTitle());
 
         prioritySeekbar.setOnSeekBarChangeListener(this);
 
         return view;
     }
+
+	@Override
+	public void onPause() {
+		super.onPause();
+
+		TaskStorage.get(getActivity()).updateTask(task);
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		unbinder.unbind();
+	}
 
     // Task title text changed
     @OnTextChanged(value = R.id.create_task_title, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
@@ -114,11 +129,5 @@ public class CreateTaskFragment extends Fragment implements SeekBar.OnSeekBarCha
 
     private void onTaskChanged(){
         getActivity().setResult(Activity.RESULT_OK);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 }
