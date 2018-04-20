@@ -1,6 +1,7 @@
 package com.stevenbenack.todoit.storage;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 public class Task {
@@ -9,88 +10,71 @@ public class Task {
 	private String description;
 	private Date createdDateTime;
 	private Date dueDateTime;
-	private int priority;
-	private boolean isDone;
+	private int priority = 0;
+	private boolean isDone = false;
 
-	public static class TaskBuilder {
-		// auto generated parameter
-		private UUID id;
-		private Date createdDateTime;
-		// required parameter
-		private String title;
-		// optional parameters
-		private String description;
-		private Date dueDateTime;
-		private int priority = 0;
-		private boolean isDone = false;
-
-		public TaskBuilder (String title) {
-			id = UUID.randomUUID();
-			this.title = title;
-			this.createdDateTime = new Date();
-		}
-
-		public TaskBuilder title(String title) {
-			this.title = title;
-			return this;
-		}
-		public TaskBuilder description(String description) {
-			this.description = description;
-			return this;
-		}
-		public TaskBuilder dueDateTime(Date dueDateTime) {
-			this.dueDateTime = dueDateTime;
-			return this;
-		}
-		public TaskBuilder priority(int priority) {
-			this.priority = priority;
-			return this;
-		}
-		public TaskBuilder isDone(boolean isDone) {
-			this.isDone = isDone;
-			return this;
-		}
-
-		public Task build() {
-			return new Task(this);
-		}
+	public Task() {
+		this(UUID.randomUUID());
 	}
 
-	private Task(TaskBuilder builder) {
-
-		id = builder.id;
-		title = builder.title;
-		description = builder.description;
-		dueDateTime = builder.dueDateTime;
-		priority = builder.priority;
-		isDone = builder.isDone;
+	public Task(UUID id) {
+		this.id = id;
+		createdDateTime = new Date();
 	}
 
 	public UUID getId() {
 		return id;
 	}
 
+	public Date getCreatedDateTime() {
+		return createdDateTime;
+	}
+
+	public void setCreatedDateTime(Date createdDateTime) {
+		this.createdDateTime = createdDateTime;
+	}
+
 	public String getTitle() {
 		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public Date getCreatedDateTime() {
-		return createdDateTime;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Date getDueDateTime() {
 		return dueDateTime;
 	}
 
+	public void setDueDateTime(Date dueDateTime) {
+		this.dueDateTime = dueDateTime;
+	}
+
+	public void setDueDateTime(int year, int month, int dayOfMonth, int hrs, int min) {
+		this.dueDateTime = new GregorianCalendar(year, month, dayOfMonth, hrs, min).getTime();
+	}
+
 	public int getPriority() {
 		return priority;
 	}
 
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
 	public boolean getIsDone() {
 		return isDone;
+	}
+
+	public void setDone(boolean isDone) {
+		this.isDone = isDone;
 	}
 }
