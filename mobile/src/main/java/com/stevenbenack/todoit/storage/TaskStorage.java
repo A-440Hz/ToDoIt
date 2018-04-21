@@ -29,11 +29,29 @@ public class TaskStorage {
     }
 
      public List<Task> getTasks() {
-        return new ArrayList<>();
+    	List<Task> tasks = new ArrayList<>();
+
+	     try (TasksCursorWrapper cursor = queryTasks(null, null)) {
+		     cursor.moveToFirst();
+		     while (!cursor.isAfterLast()) {
+			     tasks.add(cursor.getTask());
+			     cursor.moveToNext();
+		     }
+	     }
+        return tasks;
     }
 
     public Task getTask(UUID id){
-        return null;
+	    try (TasksCursorWrapper cursor = queryTasks(
+			    TaskDbSchema.TaskTable.Cols.UUID + " = ?",
+			    new String[]{id.toString()}
+	    )) {
+		    if(cursor.getCount() == 0) {
+			    return null;
+		    }
+		    cursor.moveToFirst();
+		    return cursor.getTask();
+	    }
     }
 
     public void updateTask(Task task) {
@@ -45,8 +63,8 @@ public class TaskStorage {
 			    new String[] {uuidString});
     }
 
-    private Cursor queryTasks(String whereClause, String[] whereArgs) {
-	    return database.query(
+    private TasksCursorWrapper queryTasks(String whereClause, String[] whereArgs) {
+	    Cursor cursor = database.query(
 			    TaskDbSchema.TaskTable.NAME,
 			    null, // for all columns
 			    whereClause,
@@ -55,6 +73,7 @@ public class TaskStorage {
 			    null,
 			    null
 	    );
+		return new TasksCursorWrapper(cursor);
     }
 
     public void addTask(Task task) {
